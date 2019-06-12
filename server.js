@@ -38,18 +38,18 @@ const checkPassword = password => {
   }
 }
 
-const checkSeconds = (req, res, next) => {
-  const seconds = new Date().getSeconds();
-  return () => {
-    if(seconds % 3 === 0){
-      res.status(403).send('Nope')
-    } else {
-      next()
-    }
-  }
-}
+// const checkSeconds = (req, res, next) => {
+//   const seconds = new Date().getSeconds();
+//   return () => {
+//     if(seconds % 3 === 0){
+//       res.status(403).send('Nope')
+//     } else {
+//       next()
+//     }
+//   }
+// }
 
-server.use('/api/hubs',checkPassword('banana'), checkSeconds(), hubsRouter); // custom middleware using Router which is a built-in middlewareyarn add helmet
+server.use('/api/hubs',checkPassword('banana'), hubsRouter); // custom middleware using Router which is a built-in middlewareyarn add helmet
 
 server.get('/', methodLogger, addName('Tina'), (req, res) => {
   console.log('Hey', req.name)
